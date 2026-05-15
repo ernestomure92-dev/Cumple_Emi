@@ -13,8 +13,35 @@
             "responsable": "Mary",
             "status": "Pendiente",
             "completed": false
-        }        
-        
+        }    ,    
+         {
+            "name": "Invitación",
+            "cantidad": "1",
+            "responsable": "Madre del festejado",
+            "status": "Pendiente",
+            "completed": false
+        }    ,
+         {
+            "name": "Pastel Fondant",
+            "cantidad": "1",
+            "responsable": "Madre del festejado",
+            "status": "Pendiente",
+            "completed": false
+        }   ,    
+         {
+            "name": "Piñata",
+            "cantidad": "2",
+            "responsable": "Tito",
+            "status": "Pendiente",
+            "completed": false
+        }   ,
+         {
+            "name": "Aguas (Jamaica - Horchata)",
+            "cantidad": "1",
+            "responsable": "Madre del festejado",
+            "status": "Pendiente",
+            "completed": false
+        }         
     ],
     "guests": [
         {
