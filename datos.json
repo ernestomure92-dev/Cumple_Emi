@@ -6,14 +6,27 @@
             "responsable": "Tito",
             "status": "Completo",
             "completed": true
-        }
+        },
+        {
+            "name": "Salsas",
+            "cantidad": "2",
+            "responsable": "Mary",
+            "status": "Pendiente",
+            "completed": false
+        }        
+        
     ],
     "guests": [
         {
             "nombre": "Muñoz",
             "adultos": 7,
-            "ninos": 0
-        }
+            "ninos": 1
+        },
+        {
+            "nombre": "Guzman",
+            "adultos": 5,
+            "ninos": 3
+        } ,      
       
     ]
 }
