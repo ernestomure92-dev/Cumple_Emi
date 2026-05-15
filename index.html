@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumple Emi | Checklist Invitados</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #0f1923;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 2px solid #b8860b;
+        }
+        .header {
+            background: linear-gradient(135deg, #aa0000 0%, #6a0000 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 4px solid #b8860b;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            color: #b8860b;
+            font-weight: 600;
+        }
+        .content {
+            padding: 30px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .stat-box {
+            background: #1a2332;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 120px;
+            border: 2px solid #b8860b;
+        }
+        .stat-box .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #b8860b;
+        }
+        .stat-box .label {
+            color: #8899aa;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th {
+            background: #1a2332;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #b8860b;
+            border-bottom: 2px solid #b8860b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #2a3a4a;
+            vertical-align: middle;
+            color: #e0e0e0;
+        }
+        tr:hover {
+            background: #1a2332;
+        }
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #b8860b;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            background: transparent;
+        }
+        .custom-checkbox.checked {
+            background: #2ed573;
+            border-color: #2ed573;
+        }
+        .item-text {
+            color: #e0e0e0;
+        }
+        .item-text.completed {
+            text-decoration: line-through;
+            color: #556677;
+        }
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .status-pendiente {
+            background: #aa0000;
+            color: white;
+        }
+        .status-proceso {
+            background: #3b5fa4;
+            color: white;
+        }
+        .status-completado {
+            background: #2d5a27;
+            color: white;
+        }
+        .cantidad-box {
+            background: #1a2332;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #b8860b;
+            display: inline-block;
+            border: 1px solid #b8860b;
+        }
+        .responsable-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #aa0000 0%, #6a0000 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            border: 2px solid #b8860b;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #556677;
+        }
+        .empty-state .icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            color: #b8860b;
+        }
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #2a3a4a;
+        }
+        .tab {
+            padding: 15px 30px;
+            background: #1a2332;
+            color: #8899aa;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            flex: 1;
+            text-align: center;
+        }
+        .tab:hover {
+            color: #b8860b;
+            background: #243042;
+        }
+        .tab.active {
+            color: #b8860b;
+            background: #1a2332;
+            border-bottom: 3px solid #b8860b;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .guest-adultos {
+            background: #3b5fa4;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            display: inline-block;
+        }
+        .guest-ninos {
+            background: #2d5a27;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            display: inline-block;
+        }
+        .guest-total {
+            background: #1a2332;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #b8860b;
+            display: inline-block;
+            border: 1px solid #b8860b;
+        }
+        .grand-total-box {
+            background: #1a2332;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #b8860b;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .grand-total-item {
+            text-align: center;
+        }
+        .grand-total-item .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #b8860b;
+        }
+        .grand-total-item .label {
+            color: #8899aa;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #b8860b;
+            font-size: 1.2em;
+        }
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #aa0000;
+            font-size: 1.1em;
+        }
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .content {
+                padding: 15px;
+            }
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.9em;
+            }
+            .tab {
+                padding: 12px 15px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CUMPLE EMI</h1>
+            <p>CHECKLIST Y LISTA DE INVITADOS</p>
+        </div>
+
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('checklist')">Checklist</button>
+                <button class="tab" onclick="switchTab('invitados')">Invitados</button>
+            </div>
+
+            <!-- CHECKLIST TAB -->
+            <div id="checklist" class="tab-content active">
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="number" id="total-count">0</div>
+                        <div class="label">Total</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="pending-count">0</div>
+                        <div class="label">Pendientes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="completed-count">0</div>
+                        <div class="label">Completados</div>
+                    </div>
+                </div>
+
+                <div id="checklist-loading" class="loading">Cargando checklist...</div>
+                <div id="checklist-error" class="error" style="display:none;"></div>
+
+                <table id="checklist-table" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 35%;">Item</th>
+                            <th style="width: 12%;">Cantidad</th>
+                            <th style="width: 23%;">Responsable</th>
+                            <th style="width: 15%;">Estado</th>
+                            <th style="width: 10%;">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="checklist-body">
+                    </tbody>
+                </table>
+
+                <div class="empty-state" id="empty-state" style="display:none;">
+                    <div class="icon">A</div>
+                    <h3>No hay items en el checklist</h3>
+                    <p>Edita el archivo datos.json para agregar items</p>
+                </div>
+            </div>
+
+            <!-- INVITADOS TAB -->
+            <div id="invitados" class="tab-content">
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="number" id="guest-total-familias">0</div>
+                        <div class="label">Familias</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="guest-total-personas">0</div>
+                        <div class="label">Total Personas</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="guest-total-adultos">0</div>
+                        <div class="label">Adultos</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="guest-total-ninos">0</div>
+                        <div class="label">Ninos</div>
+                    </div>
+                </div>
+
+                <div id="guests-loading" class="loading">Cargando invitados...</div>
+                <div id="guests-error" class="error" style="display:none;"></div>
+
+                <table id="guests-table" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 40%;">Nombre / Familia</th>
+                            <th style="width: 15%;">Adultos</th>
+                            <th style="width: 15%;">Ninos</th>
+                            <th style="width: 15%;">Total</th>
+                            <th style="width: 10%;">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guests-body">
+                    </tbody>
+                </table>
+
+                <div class="empty-state" id="guests-empty-state" style="display:none;">
+                    <div class="icon">I</div>
+                    <h3>Lista de invitados vacia</h3>
+                    <p>Edita el archivo datos.json para agregar invitados</p>
+                </div>
+
+                <div class="grand-total-box" id="grand-total-box" style="display:none;">
+                    <div class="grand-total-item">
+                        <div class="number" id="grand-total">0</div>
+                        <div class="label">Total Personas</div>
+                    </div>
+                    <div class="grand-total-item">
+                        <div class="number" id="grand-adultos">0</div>
+                        <div class="label">Adultos</div>
+                    </div>
+                    <div class="grand-total-item">
+                        <div class="number" id="grand-ninos">0</div>
+                        <div class="label">Ninos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURA AQUI LA URL DE TU datos.json EN GITHUB
+        // Ejemplo: 'https://tuusuario.github.io/turepo/datos.json'
+        const DATA_URL = './datos.json';
+
+        let data = { items: [], guests: [] };
+
+        async function loadData() {
+            try {
+                const response = await fetch(DATA_URL + '?t=' + Date.now());
+                if (!response.ok) throw new Error('No se pudo cargar datos.json');
+                data = await response.json();
+
+                renderItems();
+                renderGuests();
+            } catch (err) {
+                document.getElementById('checklist-loading').style.display = 'none';
+                document.getElementById('guests-loading').style.display = 'none';
+                document.getElementById('checklist-error').textContent = 'Error: ' + err.message;
+                document.getElementById('checklist-error').style.display = 'block';
+                document.getElementById('guests-error').textContent = 'Error: ' + err.message;
+                document.getElementById('guests-error').style.display = 'block';
+            }
+        }
+
+        function renderItems() {
+            const tbody = document.getElementById('checklist-body');
+            const emptyState = document.getElementById('empty-state');
+            const table = document.getElementById('checklist-table');
+            const loading = document.getElementById('checklist-loading');
+
+            loading.style.display = 'none';
+
+            const items = data.items || [];
+
+            if (items.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                table.style.display = 'none';
+                updateItemStats(items);
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            table.style.display = 'table';
+
+            tbody.innerHTML = items.map((item, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>
+                        <div class="checkbox-wrapper">
+                            <div class="custom-checkbox ${item.completed ? 'checked' : ''}">
+                                ${item.completed ? '&#10003;' : ''}
+                            </div>
+                            <span class="item-text ${item.completed ? 'completed' : ''}">${escapeHtml(item.name)}</span>
+                        </div>
+                    </td>
+                    <td><span class="cantidad-box">${escapeHtml(item.cantidad)}</span></td>
+                    <td>
+                        <div class="responsable-tag">
+                            <div class="avatar">${item.responsable.charAt(0).toUpperCase()}</div>
+                            <span>${escapeHtml(item.responsable)}</span>
+                        </div>
+                    </td>
+                    <td><span class="status-badge status-${getStatusClass(item.status)}">${item.status}</span></td>
+                    <td>-</td>
+                </tr>
+            `).join('');
+
+            updateItemStats(items);
+        }
+
+        function getStatusClass(status) {
+            const map = {
+                'Pendiente': 'pendiente',
+                'En proceso': 'proceso',
+                'Completado': 'completado'
+            };
+            return map[status] || 'pendiente';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function updateItemStats(items) {
+            const total = items.length;
+            const completed = items.filter(i => i.completed).length;
+            const pending = total - completed;
+
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('pending-count').textContent = pending;
+            document.getElementById('completed-count').textContent = completed;
+        }
+
+        function renderGuests() {
+            const tbody = document.getElementById('guests-body');
+            const emptyState = document.getElementById('guests-empty-state');
+            const table = document.getElementById('guests-table');
+            const loading = document.getElementById('guests-loading');
+            const grandTotalBox = document.getElementById('grand-total-box');
+
+            loading.style.display = 'none';
+
+            const guests = data.guests || [];
+
+            if (guests.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                table.style.display = 'none';
+                grandTotalBox.style.display = 'none';
+                updateGuestStats(guests);
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            table.style.display = 'table';
+            grandTotalBox.style.display = 'flex';
+
+            tbody.innerHTML = guests.map((guest, index) => {
+                const total = (parseInt(guest.adultos) || 0) + (parseInt(guest.ninos) || 0);
+                return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><strong>${escapeHtml(guest.nombre)}</strong></td>
+                    <td><span class="guest-adultos">${guest.adultos}</span></td>
+                    <td><span class="guest-ninos">${guest.ninos}</span></td>
+                    <td><span class="guest-total">${total}</span></td>
+                    <td>-</td>
+                </tr>
+            `}).join('');
+
+            updateGuestStats(guests);
+        }
+
+        function updateGuestStats(guests) {
+            const totalFamilias = guests.length;
+            const totalAdultos = guests.reduce((sum, g) => sum + (parseInt(g.adultos) || 0), 0);
+            const totalNinos = guests.reduce((sum, g) => sum + (parseInt(g.ninos) || 0), 0);
+            const totalPersonas = totalAdultos + totalNinos;
+
+            document.getElementById('guest-total-familias').textContent = totalFamilias;
+            document.getElementById('guest-total-personas').textContent = totalPersonas;
+            document.getElementById('guest-total-adultos').textContent = totalAdultos;
+            document.getElementById('guest-total-ninos').textContent = totalNinos;
+
+            document.getElementById('grand-total').textContent = totalPersonas;
+            document.getElementById('grand-adultos').textContent = totalAdultos;
+            document.getElementById('grand-ninos').textContent = totalNinos;
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Cargar datos al iniciar
+        loadData();
+
+        // Recargar cada 30 segundos (por si editaste el JSON)
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
