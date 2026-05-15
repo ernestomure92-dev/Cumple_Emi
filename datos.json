@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "name": "Salón",
+            "cantidad": "1",
+            "responsable": "Tito",
+            "status": "Completo",
+            "completed": true
+        }
+    ],
+    "guests": [
+        {
+            "nombre": "Muñoz",
+            "adultos": 7,
+            "ninos": 0
+        }
+      
+    ]
+}
