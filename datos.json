@@ -29,6 +29,13 @@
             "completed": false
         }   ,    
          {
+            "name": "Pastel 100px",
+            "cantidad": "1",
+            "responsable": "Por Definir",
+            "status": "Pendiente",
+            "completed": false
+        }   ,         
+         {
             "name": "Piñata",
             "cantidad": "2",
             "responsable": "Tito",
@@ -37,11 +44,32 @@
         }   ,
          {
             "name": "Aguas (Jamaica - Horchata)",
-            "cantidad": "1",
+            "cantidad": "40 L",
             "responsable": "Madre del festejado",
             "status": "Pendiente",
             "completed": false
-        }         
+        } ,
+         {
+            "name": "Refrescos",
+            "cantidad": "15 (3L)",
+            "responsable": "Tito",
+            "status": "Pendiente",
+            "completed": false
+        }   ,      
+         {
+            "name": "Boings",
+            "cantidad": "30",
+            "responsable": "Tito",
+            "status": "Pendiente",
+            "completed": false
+        }   ,      
+         {
+            "name": "Desechables ",
+            "cantidad": "1",
+            "responsable": "Por Definir",
+            "status": "Pendiente",
+            "completed": false
+        }           
     ],
     "guests": [
         {
