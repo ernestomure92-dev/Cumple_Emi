@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cumple 8 Emi - Checklist y Invitados</title>
+    <title>Cumple 8 Emi (Checklist - Invitados)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -233,7 +233,7 @@
             display: inline-block;
             font-size: 0.9em;
         }
-        .guest-niños {
+        .guest-ninos {
             background: #2d5a27;
             padding: 4px 10px;
             border-radius: 8px;
@@ -353,7 +353,7 @@
                 padding: 4px 8px;
                 font-size: 0.75em;
             }
-            .cantidad-box, .guest-adultos, .guest-niños, .guest-total {
+            .cantidad-box, .guest-adultos, .guest-ninos, .guest-total {
                 padding: 3px 8px;
                 font-size: 0.85em;
             }
@@ -395,8 +395,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Cumple Emi</h1>
-            <p>Checkilst - Invitados</p>
+            <h1>CUMPLE 8 EMI </h1>
+            <p>Checklist - Invitados</p>
         </div>
 
         <div class="content">
@@ -464,7 +464,7 @@
                         <div class="label">Adultos</div>
                     </div>
                     <div class="stat-box">
-                        <div class="number" id="guest-total-niños">0</div>
+                        <div class="number" id="guest-total-ninos">0</div>
                         <div class="label">Niños</div>
                     </div>
                 </div>
@@ -504,7 +504,7 @@
                         <div class="label">Adultos</div>
                     </div>
                     <div class="grand-total-item">
-                        <div class="number" id="grand-niños">0</div>
+                        <div class="number" id="grand-ninos">0</div>
                         <div class="label">Niños</div>
                     </div>
                 </div>
@@ -630,13 +630,13 @@
             grandTotalBox.style.display = 'flex';
 
             tbody.innerHTML = guests.map((guest, index) => {
-                const total = (parseInt(guest.adultos) || 0) + (parseInt(guest.niños) || 0);
+                const total = (parseInt(guest.adultos) || 0) + (parseInt(guest.ninos) || 0);
                 return `
                 <tr>
                     <td>${index + 1}</td>
                     <td><strong>${escapeHtml(guest.nombre)}</strong></td>
                     <td><span class="guest-adultos">${guest.adultos}</span></td>
-                    <td><span class="guest-niños">${guest.niños}</span></td>
+                    <td><span class="guest-ninos">${guest.ninos}</span></td>
                     <td><span class="guest-total">${total}</span></td>
                 </tr>
             `}).join('');
@@ -647,17 +647,17 @@
         function updateGuestStats(guests) {
             const totalFamilias = guests.length;
             const totalAdultos = guests.reduce((sum, g) => sum + (parseInt(g.adultos) || 0), 0);
-            const totalniños = guests.reduce((sum, g) => sum + (parseInt(g.niños) || 0), 0);
-            const totalPersonas = totalAdultos + totalniños;
+            const totalNinos = guests.reduce((sum, g) => sum + (parseInt(g.ninos) || 0), 0);
+            const totalPersonas = totalAdultos + totalNinos;
 
             document.getElementById('guest-total-familias').textContent = totalFamilias;
             document.getElementById('guest-total-personas').textContent = totalPersonas;
             document.getElementById('guest-total-adultos').textContent = totalAdultos;
-            document.getElementById('guest-total-niños').textContent = totalniños;
+            document.getElementById('guest-total-ninos').textContent = totalNinos;
 
             document.getElementById('grand-total').textContent = totalPersonas;
             document.getElementById('grand-adultos').textContent = totalAdultos;
-            document.getElementById('grand-niños').textContent = totalniños;
+            document.getElementById('grand-ninos').textContent = totalNinos;
         }
 
         function switchTab(tabName) {
