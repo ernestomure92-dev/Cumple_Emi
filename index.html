@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cumple 8 Emi (Checklist - Invitados)</title>
+    <title>Cumple Emi - Checklist y Invitados</title>
     <style>
         * {
             box-sizing: border-box;
@@ -90,6 +90,32 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.85em;
+            cursor: default;
+            user-select: none;
+            position: relative;
+        }
+        th.sortable {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        th.sortable:hover {
+            color: #ffd700;
+        }
+        th.sortable::after {
+            content: ' 95';
+            font-size: 0.75em;
+            opacity: 0.5;
+            margin-left: 4px;
+        }
+        th.sortable.asc::after {
+            content: ' 91';
+            opacity: 1;
+            color: #ffd700;
+        }
+        th.sortable.desc::after {
+            content: ' 93';
+            opacity: 1;
+            color: #ffd700;
         }
         td {
             padding: 12px 10px;
@@ -333,6 +359,10 @@
                 font-size: 0.75em;
                 letter-spacing: 0.5px;
             }
+            th.sortable::after {
+                font-size: 0.65em;
+                margin-left: 2px;
+            }
             td {
                 padding: 10px 6px;
                 font-size: 0.88em;
@@ -379,7 +409,6 @@
             .empty-state p {
                 font-size: 0.85em;
             }
-            /* Hacer tabla scrollable horizontal en movil */
             .table-wrapper {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -395,8 +424,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>CUMPLE 8 EMI </h1>
-            <p>Checklist - Invitados</p>
+            <h1>CUMPLEAÑOS EMI</h1>
+            <p>CHECKLIST e INVITADOS</p>
+            <p>Sabado 1 de agosto | 10 am - 3 pm </p>
         </div>
 
         <div class="content">
@@ -432,8 +462,8 @@
                                 <th style="width: 5%;">#</th>
                                 <th style="width: 40%;">Item</th>
                                 <th style="width: 15%;">Cantidad</th>
-                                <th style="width: 25%;">Responsable</th>
-                                <th style="width: 15%;">Estado</th>
+                                <th style="width: 25%;" class="sortable" onclick="sortItems('responsable')" id="th-responsable">Responsable</th>
+                                <th style="width: 15%;" class="sortable" onclick="sortItems('status')" id="th-status">Estado</th>
                             </tr>
                         </thead>
                         <tbody id="checklist-body">
@@ -477,10 +507,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
-                                <th style="width: 45%;">Nombre / Familia</th>
-                                <th style="width: 17%;">Adultos</th>
-                                <th style="width: 17%;">Niños</th>
-                                <th style="width: 16%;">Total</th>
+                                <th style="width: 45%;" class="sortable" onclick="sortGuests('nombre')" id="th-nombre">Nombre / Familia</th>
+                                <th style="width: 17%;" class="sortable" onclick="sortGuests('adultos')" id="th-adultos">Adultos</th>
+                                <th style="width: 17%;" class="sortable" onclick="sortGuests('ninos')" id="th-ninos">Niños</th>
+                                <th style="width: 16%;" class="sortable" onclick="sortGuests('total')" id="th-total">Total</th>
                             </tr>
                         </thead>
                         <tbody id="guests-body">
@@ -515,6 +545,8 @@
     <script>
         const DATA_URL = './datos.json';
         let data = { items: [], guests: [] };
+        let itemSort = { column: null, direction: 'asc' };
+        let guestSort = { column: null, direction: 'asc' };
 
         async function loadData() {
             try {
@@ -534,15 +566,85 @@
             }
         }
 
+        function sortItems(column) {
+            const items = [...(data.items || [])];
+
+            if (itemSort.column === column) {
+                itemSort.direction = itemSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                itemSort.column = column;
+                itemSort.direction = 'asc';
+            }
+
+            // Actualizar clases visuales
+            document.querySelectorAll('#checklist-table th.sortable').forEach(th => {
+                th.classList.remove('asc', 'desc');
+            });
+            const thId = column === 'responsable' ? 'th-responsable' : 'th-status';
+            document.getElementById(thId).classList.add(itemSort.direction);
+
+            items.sort((a, b) => {
+                let valA = (a[column] || '').toString().toLowerCase();
+                let valB = (b[column] || '').toString().toLowerCase();
+
+                if (valA < valB) return itemSort.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return itemSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            renderItemsList(items);
+        }
+
+        function sortGuests(column) {
+            const guests = [...(data.guests || [])];
+
+            if (guestSort.column === column) {
+                guestSort.direction = guestSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                guestSort.column = column;
+                guestSort.direction = 'asc';
+            }
+
+            // Actualizar clases visuales
+            document.querySelectorAll('#guests-table th.sortable').forEach(th => {
+                th.classList.remove('asc', 'desc');
+            });
+            const thMap = { 'nombre': 'th-nombre', 'adultos': 'th-adultos', 'ninos': 'th-ninos', 'total': 'th-total' };
+            document.getElementById(thMap[column]).classList.add(guestSort.direction);
+
+            guests.sort((a, b) => {
+                let valA, valB;
+
+                if (column === 'total') {
+                    valA = (parseInt(a.adultos) || 0) + (parseInt(a.ninos) || 0);
+                    valB = (parseInt(b.adultos) || 0) + (parseInt(b.ninos) || 0);
+                } else if (column === 'adultos' || column === 'ninos') {
+                    valA = parseInt(a[column]) || 0;
+                    valB = parseInt(b[column]) || 0;
+                } else {
+                    valA = (a[column] || '').toString().toLowerCase();
+                    valB = (b[column] || '').toString().toLowerCase();
+                }
+
+                if (valA < valB) return guestSort.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return guestSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            renderGuestsList(guests);
+        }
+
         function renderItems() {
+            renderItemsList(data.items || []);
+        }
+
+        function renderItemsList(items) {
             const tbody = document.getElementById('checklist-body');
             const emptyState = document.getElementById('empty-state');
             const table = document.getElementById('checklist-table');
             const loading = document.getElementById('checklist-loading');
 
             loading.style.display = 'none';
-
-            const items = data.items || [];
 
             if (items.length === 0) {
                 tbody.innerHTML = '';
@@ -606,6 +708,10 @@
         }
 
         function renderGuests() {
+            renderGuestsList(data.guests || []);
+        }
+
+        function renderGuestsList(guests) {
             const tbody = document.getElementById('guests-body');
             const emptyState = document.getElementById('guests-empty-state');
             const table = document.getElementById('guests-table');
@@ -613,8 +719,6 @@
             const grandTotalBox = document.getElementById('grand-total-box');
 
             loading.style.display = 'none';
-
-            const guests = data.guests || [];
 
             if (guests.length === 0) {
                 tbody.innerHTML = '';
