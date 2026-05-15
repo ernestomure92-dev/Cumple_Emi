@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cumple Emi | Checklist Invitados</title>
+    <title>Cumple 8 Emi - Checklist y Invitados</title>
     <style>
         * {
             box-sizing: border-box;
@@ -14,13 +14,13 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0a1628 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: #0f1923;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
             border: 2px solid #b8860b;
@@ -28,49 +28,50 @@
         .header {
             background: linear-gradient(135deg, #aa0000 0%, #6a0000 100%);
             color: white;
-            padding: 30px;
+            padding: 25px 20px;
             text-align: center;
             border-bottom: 4px solid #b8860b;
         }
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2em;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         .header p {
-            font-size: 1.2em;
+            font-size: 1em;
             opacity: 0.9;
             color: #b8860b;
             font-weight: 600;
         }
         .content {
-            padding: 30px;
+            padding: 20px;
         }
         .stats {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .stat-box {
             background: #1a2332;
-            padding: 15px 25px;
-            border-radius: 12px;
+            padding: 12px 18px;
+            border-radius: 10px;
             text-align: center;
-            min-width: 120px;
+            min-width: 100px;
             border: 2px solid #b8860b;
+            flex: 1;
         }
         .stat-box .number {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #b8860b;
         }
         .stat-box .label {
             color: #8899aa;
-            font-size: 0.9em;
+            font-size: 0.8em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -81,17 +82,17 @@
         }
         th {
             background: #1a2332;
-            padding: 15px;
+            padding: 12px 10px;
             text-align: left;
             font-weight: 600;
             color: #b8860b;
             border-bottom: 2px solid #b8860b;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         td {
-            padding: 15px;
+            padding: 12px 10px;
             border-bottom: 1px solid #2a3a4a;
             vertical-align: middle;
             color: #e0e0e0;
@@ -105,16 +106,17 @@
             gap: 10px;
         }
         .custom-checkbox {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border: 2px solid #b8860b;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             color: white;
             background: transparent;
+            flex-shrink: 0;
         }
         .custom-checkbox.checked {
             background: #2ed573;
@@ -128,11 +130,12 @@
             color: #556677;
         }
         .status-badge {
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-weight: 600;
             display: inline-block;
+            white-space: nowrap;
         }
         .status-pendiente {
             background: #aa0000;
@@ -148,12 +151,13 @@
         }
         .cantidad-box {
             background: #1a2332;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 8px;
             font-weight: 600;
             color: #b8860b;
             display: inline-block;
             border: 1px solid #b8860b;
+            font-size: 0.9em;
         }
         .responsable-tag {
             display: flex;
@@ -161,8 +165,8 @@
             gap: 8px;
         }
         .avatar {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: linear-gradient(135deg, #aa0000 0%, #6a0000 100%);
             color: white;
@@ -170,32 +174,33 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 0.85em;
             border: 2px solid #b8860b;
+            flex-shrink: 0;
         }
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             color: #556677;
         }
         .empty-state .icon {
-            font-size: 4em;
+            font-size: 3.5em;
             margin-bottom: 15px;
             color: #b8860b;
         }
         .tabs {
             display: flex;
             gap: 0;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 2px solid #2a3a4a;
         }
         .tab {
-            padding: 15px 30px;
+            padding: 14px 20px;
             background: #1a2332;
             color: #8899aa;
             cursor: pointer;
             border: none;
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -221,32 +226,35 @@
         }
         .guest-adultos {
             background: #3b5fa4;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 8px;
             font-weight: 600;
             color: white;
             display: inline-block;
+            font-size: 0.9em;
         }
-        .guest-ninos {
+        .guest-niños {
             background: #2d5a27;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 8px;
             font-weight: 600;
             color: white;
             display: inline-block;
+            font-size: 0.9em;
         }
         .guest-total {
             background: #1a2332;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 8px;
             font-weight: 600;
             color: #b8860b;
             display: inline-block;
             border: 1px solid #b8860b;
+            font-size: 0.9em;
         }
         .grand-total-box {
             background: #1a2332;
-            padding: 20px;
+            padding: 18px;
             border-radius: 12px;
             margin-top: 20px;
             border: 2px solid #b8860b;
@@ -259,13 +267,13 @@
             text-align: center;
         }
         .grand-total-item .number {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #b8860b;
         }
         .grand-total-item .label {
             color: #8899aa;
-            font-size: 0.9em;
+            font-size: 0.85em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -273,28 +281,112 @@
             text-align: center;
             padding: 40px;
             color: #b8860b;
-            font-size: 1.2em;
+            font-size: 1.1em;
         }
         .error {
             text-align: center;
             padding: 40px;
             color: #aa0000;
-            font-size: 1.1em;
+            font-size: 1em;
         }
+
+        /* ====== MOBILE OPTIMIZATIONS ====== */
         @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            .header {
+                padding: 18px 15px;
+            }
             .header h1 {
-                font-size: 1.8em;
+                font-size: 1.4em;
+                letter-spacing: 2px;
+            }
+            .header p {
+                font-size: 0.85em;
             }
             .content {
-                padding: 15px;
+                padding: 12px;
             }
-            th, td {
+            .stats {
+                gap: 6px;
+                margin-bottom: 15px;
+            }
+            .stat-box {
                 padding: 10px 8px;
-                font-size: 0.9em;
+                min-width: 70px;
+                border-width: 1.5px;
+            }
+            .stat-box .number {
+                font-size: 1.5em;
+            }
+            .stat-box .label {
+                font-size: 0.7em;
             }
             .tab {
-                padding: 12px 15px;
+                padding: 12px 8px;
+                font-size: 0.8em;
+                letter-spacing: 0.5px;
+            }
+            th {
+                padding: 10px 6px;
+                font-size: 0.75em;
+                letter-spacing: 0.5px;
+            }
+            td {
+                padding: 10px 6px;
+                font-size: 0.88em;
+            }
+            .checkbox-wrapper {
+                gap: 8px;
+            }
+            .custom-checkbox {
+                width: 20px;
+                height: 20px;
+            }
+            .avatar {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75em;
+            }
+            .status-badge {
+                padding: 4px 8px;
+                font-size: 0.75em;
+            }
+            .cantidad-box, .guest-adultos, .guest-niños, .guest-total {
+                padding: 3px 8px;
                 font-size: 0.85em;
+            }
+            .grand-total-box {
+                padding: 14px;
+                gap: 10px;
+            }
+            .grand-total-item .number {
+                font-size: 1.5em;
+            }
+            .grand-total-item .label {
+                font-size: 0.75em;
+            }
+            .empty-state {
+                padding: 35px 15px;
+            }
+            .empty-state .icon {
+                font-size: 2.8em;
+            }
+            .empty-state h3 {
+                font-size: 1.1em;
+            }
+            .empty-state p {
+                font-size: 0.85em;
+            }
+            /* Hacer tabla scrollable horizontal en movil */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                border-radius: 8px;
+            }
+            .table-wrapper table {
+                min-width: 500px;
             }
         }
     </style>
@@ -303,8 +395,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>CUMPLE EMI</h1>
-            <p>CHECKLIST Y LISTA DE INVITADOS</p>
+            <h1>Cumple Emi</h1>
+            <p>Checkilst - Invitados</p>
         </div>
 
         <div class="content">
@@ -333,19 +425,21 @@
                 <div id="checklist-loading" class="loading">Cargando checklist...</div>
                 <div id="checklist-error" class="error" style="display:none;"></div>
 
-                <table id="checklist-table" style="display:none;">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%;">#</th>
-                            <th style="width: 35%;">Item</th>
-                            <th style="width: 12%;">Cantidad</th>
-                            <th style="width: 23%;">Responsable</th>
-                            <th style="width: 15%;">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="checklist-body">
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table id="checklist-table" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">#</th>
+                                <th style="width: 40%;">Item</th>
+                                <th style="width: 15%;">Cantidad</th>
+                                <th style="width: 25%;">Responsable</th>
+                                <th style="width: 15%;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="checklist-body">
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="empty-state" id="empty-state" style="display:none;">
                     <div class="icon">A</div>
@@ -370,27 +464,29 @@
                         <div class="label">Adultos</div>
                     </div>
                     <div class="stat-box">
-                        <div class="number" id="guest-total-ninos">0</div>
-                        <div class="label">Ninos</div>
+                        <div class="number" id="guest-total-niños">0</div>
+                        <div class="label">Niños</div>
                     </div>
                 </div>
 
                 <div id="guests-loading" class="loading">Cargando invitados...</div>
                 <div id="guests-error" class="error" style="display:none;"></div>
 
-                <table id="guests-table" style="display:none;">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%;">#</th>
-                            <th style="width: 40%;">Nombre / Familia</th>
-                            <th style="width: 15%;">Adultos</th>
-                            <th style="width: 15%;">Ninos</th>
-                            <th style="width: 15%;">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="guests-body">
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table id="guests-table" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">#</th>
+                                <th style="width: 45%;">Nombre / Familia</th>
+                                <th style="width: 17%;">Adultos</th>
+                                <th style="width: 17%;">Niños</th>
+                                <th style="width: 16%;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guests-body">
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="empty-state" id="guests-empty-state" style="display:none;">
                     <div class="icon">I</div>
@@ -408,8 +504,8 @@
                         <div class="label">Adultos</div>
                     </div>
                     <div class="grand-total-item">
-                        <div class="number" id="grand-ninos">0</div>
-                        <div class="label">Ninos</div>
+                        <div class="number" id="grand-niños">0</div>
+                        <div class="label">Niños</div>
                     </div>
                 </div>
             </div>
@@ -417,10 +513,7 @@
     </div>
 
     <script>
-        // CONFIGURA AQUI LA URL DE TU datos.json EN GITHUB
-        // Ejemplo: 'https://tuusuario.github.io/turepo/datos.json'
         const DATA_URL = './datos.json';
-
         let data = { items: [], guests: [] };
 
         async function loadData() {
@@ -481,7 +574,6 @@
                         </div>
                     </td>
                     <td><span class="status-badge status-${getStatusClass(item.status)}">${item.status}</span></td>
-                    <td>-</td>
                 </tr>
             `).join('');
 
@@ -538,15 +630,14 @@
             grandTotalBox.style.display = 'flex';
 
             tbody.innerHTML = guests.map((guest, index) => {
-                const total = (parseInt(guest.adultos) || 0) + (parseInt(guest.ninos) || 0);
+                const total = (parseInt(guest.adultos) || 0) + (parseInt(guest.niños) || 0);
                 return `
                 <tr>
                     <td>${index + 1}</td>
                     <td><strong>${escapeHtml(guest.nombre)}</strong></td>
                     <td><span class="guest-adultos">${guest.adultos}</span></td>
-                    <td><span class="guest-ninos">${guest.ninos}</span></td>
+                    <td><span class="guest-niños">${guest.niños}</span></td>
                     <td><span class="guest-total">${total}</span></td>
-                    <td>-</td>
                 </tr>
             `}).join('');
 
@@ -556,17 +647,17 @@
         function updateGuestStats(guests) {
             const totalFamilias = guests.length;
             const totalAdultos = guests.reduce((sum, g) => sum + (parseInt(g.adultos) || 0), 0);
-            const totalNinos = guests.reduce((sum, g) => sum + (parseInt(g.ninos) || 0), 0);
-            const totalPersonas = totalAdultos + totalNinos;
+            const totalniños = guests.reduce((sum, g) => sum + (parseInt(g.niños) || 0), 0);
+            const totalPersonas = totalAdultos + totalniños;
 
             document.getElementById('guest-total-familias').textContent = totalFamilias;
             document.getElementById('guest-total-personas').textContent = totalPersonas;
             document.getElementById('guest-total-adultos').textContent = totalAdultos;
-            document.getElementById('guest-total-ninos').textContent = totalNinos;
+            document.getElementById('guest-total-niños').textContent = totalniños;
 
             document.getElementById('grand-total').textContent = totalPersonas;
             document.getElementById('grand-adultos').textContent = totalAdultos;
-            document.getElementById('grand-ninos').textContent = totalNinos;
+            document.getElementById('grand-niños').textContent = totalniños;
         }
 
         function switchTab(tabName) {
@@ -577,10 +668,7 @@
             document.getElementById(tabName).classList.add('active');
         }
 
-        // Cargar datos al iniciar
         loadData();
-
-        // Recargar cada 30 segundos (por si editaste el JSON)
         setInterval(loadData, 30000);
     </script>
 </body>
