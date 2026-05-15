@@ -81,7 +81,16 @@
             "nombre": "Guzman",
             "adultos": 5,
             "ninos": 3
-        }       
-      
+        } ,
+        {
+            "nombre": "Tocho Emi",
+            "adultos": 5,
+            "ninos": 6
+        }  ,
+        {
+            "nombre": "ECC",
+            "adultos": 0,
+            "ninos": 22
+        }          
     ]
 }
